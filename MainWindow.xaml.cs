@@ -76,12 +76,19 @@ namespace GymTimer
             //default to 2:30 second round
             cmb_RoundTimeMin.SelectedItem = 2;
             cmb_RoundTimeSec.SelectedItem = 30;
+
+            //volume is set to 100 by default
+            sld_volume.Value = 100;
         }
 
         //Updates the displayed time left
         private void timer_Tick(object sender, EventArgs e)
         {
-            _secondsLeft = _secondsLeft - 1;
+            if (_secondsLeft > 0)
+            {
+                _secondsLeft = _secondsLeft - 1;
+            }
+            
             updateTime();
 
             //Once the time left reaches zero, we start a new round (either a rest one or another regular round)
@@ -146,8 +153,8 @@ namespace GymTimer
             //Update the main timer - if we are within 10% of the end, display special colour
             if (_currentRound == timeType.REST)
             {
-                //If we're within 10% of the end time for a rest period, display BLUE as warning
-                if (_secondsLeft <= (_secondsRest / 10))
+                //If we're within 10 s of the end time for a rest period, display BLUE as warning
+                if (_secondsLeft <= 10)
                 {
                     lbl_Time.Foreground = blueGradient;
                     roundEndWarning();
@@ -160,8 +167,8 @@ namespace GymTimer
             }
             else
             {
-                //If we're within 10% of the end time for a rest period, display RED as warning
-                if (_secondsLeft <= (_secondsRound / 10))
+                //If we're within 15s of the end time for a rest period, display RED as warning
+                if (_secondsLeft <= 10)
                 {
                     lbl_Time.Foreground = redGradient;
                 
@@ -310,6 +317,12 @@ namespace GymTimer
         private void chk_RoundWarning_Click(object sender, RoutedEventArgs e)
         {
             _roundEndWarning = (bool)chk_RoundWarning.IsChecked;
+        }
+
+        private void sld_volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            float newVol = (float)sld_volume.Value / 100;
+            _mediaPlayer.Volume = newVol;
         }
     }
 }

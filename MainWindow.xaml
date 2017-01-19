@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GymTimer"
         mc:Ignorable="d"
-        Title="GymTimer" Height="398.203" Width="561.677" ResizeMode="NoResize" Background="Black">
+        Title="GymTimer" Height="398.203" Width="561.677" ResizeMode="NoResize" Background="Black" WindowStyle="ThreeDBorderWindow">
     
     <Window.Resources>
         <LinearGradientBrush x:Key="GrayGradientBrush" StartPoint="0,0" EndPoint="1,1">
@@ -99,6 +99,9 @@
 
         <Button x:Name="btn_Start" Content="Start" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="90" Height="30" ToolTip="Starts or stops the timer" Click="btn_Start_Click"/>
         <Button x:Name="btn_Reset" Content="Reset" HorizontalAlignment="Left" Margin="105,317,0,0" VerticalAlignment="Top" Width="90" Height="30" ToolTip="Resets the timer" Click="btn_Reset_Click"/>
+        <StackPanel VerticalAlignment="Top" Margin="211,317,133,0" Height="30">
+            <Slider x:Name="sld_volume" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="sld_volume_ValueChanged" />
+        </StackPanel>
         <ToggleButton x:Name="chk_Mute" Content="Mute" HorizontalAlignment="Left" Margin="436,317,0,0" VerticalAlignment="Top" Width="90" Height="30" IsChecked="False" ToolTip="Mutes audible indication that time has elapsed" Click="chk_Mute_Click"/>
 
 
